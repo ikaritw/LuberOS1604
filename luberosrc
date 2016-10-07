@@ -1,0 +1,17 @@
+ROOT_HOME=$(pwd)
+
+# Environment variable
+export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+
+# Hadoop
+export HADOOP_HOME=${ROOT_HOME}/lib/hadoop-2.7.3
+
+# Pig
+export PIG_HOME=${ROOT_HOME}/lib/pig-0.16.0
+
+# Hive
+export HIVE_HOME=${ROOT_HOME}/lib/hive-2.1.0
+
+
+# PATH
+export PATH=$PATH:${HADOOP_HOME}/bin:${HADOOP_HOME}/sbin:${PIG_HOME}/bin:${HIVE_HOME}/bin
