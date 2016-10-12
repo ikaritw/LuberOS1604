@@ -2,6 +2,9 @@
 
 # root path
 LUBER_ROOT=$(pwd)/luber
+if [ ! -d $LUBER_ROOT ]; then
+	mkdir -p $LUBER_ROOT
+fi
 
 ## JAVA 
 JDK_HOME="$LUBER_ROOT/java"
@@ -69,5 +72,6 @@ fi
 
 HADOOP_IMAGE_NAME="ikaritw/luberos:1.0"
 docker run -itd -p 1022:22 --name nn --hostname nn -v $LUBER_ROOT_LINK:/opt/luber --net=hadoop "$HADOOP_IMAGE_NAME"
+docker run -itd -p 1023:22 --name rm --hostname rm -v $LUBER_ROOT_LINK:/opt/luber --net=hadoop "$HADOOP_IMAGE_NAME"
 
 echo "Complete init"

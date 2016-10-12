@@ -14,13 +14,18 @@ MAINTAINER ikaritw <ikaritw+docker@gmail.com>
 WORKDIR /root
 
 # Add manager
-RUN useradd --create-home --shell /bin/bash admin \
- && echo 'admin:admin' | chpasswd \
- && adduser admin sudo
+RUN useradd --create-home --shell /bin/bash biguser \
+ && echo 'biguser:biguser' | chpasswd \
+ && groupadd bigboss \
+ && adduser biguser sudo \
+ && adduser biguser bigboss \
+ && mkdir -p /home/biguser/hdfs/namenode \
+ && mkdir -p /home/biguser/hdfs/datanode \
+ && mkdir $HADOOP_HOME/logs
 
 # install openssh-server, openjdk and wget
 RUN apt-get update \
- && apt-get install -y curl tar sudo openssh-server openssh-client rsync vim vim-scripts \
+ && apt-get install -y curl tar sudo openssh-server openssh-client rsync vim \
  && apt-get autoremove \
  && apt-get autoclean \
  && rm -rf /var/lib/apt/lists/* \
